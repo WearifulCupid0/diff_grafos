@@ -64,7 +64,8 @@ void main(){
         printf("  7  - Busca em amplitude [implementar]\n");
         printf("  8  - Existe caminho?  (entre dois vertices) \n");
         printf("  9  - Encontra caminho (entre dois vertices) \n");
-        printf("10 - Sair \n");
+        printf("  10 - Mostra o tipo de grafo \n");
+        printf("11 - Sair \n");
 
         scanf ("%d", &opcao);
 
@@ -91,7 +92,7 @@ void main(){
         case 1 :
 
             pv = (int *)malloc(sizeof(int));
-            printf ("ID do vértice : ");
+            printf ("ID do vï¿½rtice : ");
             scanf("%d", pv);
             incluirVertice(grafo, pv, comparaVertice);
 
@@ -101,9 +102,9 @@ void main(){
 
         case 2 :
 
-            printf ("\nID do vértice origem : ");
+            printf ("\nID do vï¿½rtice origem : ");
             scanf("%d", &vOrigem);
-            printf ("\nID do vértice destino : ");
+            printf ("\nID do vï¿½rtice destino : ");
             scanf("%d", &vDestino);
             incluirAresta(grafo, &vOrigem, &vDestino, comparaVertice);
 
@@ -122,9 +123,9 @@ void main(){
             break;
 
         case 8 :
-            printf ("\nID do vértice origem : ");
+            printf ("\nID do vï¿½rtice origem : ");
             scanf("%d", &vOrigem);
-            printf ("\nID do vértice destino : ");
+            printf ("\nID do vï¿½rtice destino : ");
             scanf("%d", &vDestino);
 
             int result = existeCaminho(grafo, &vOrigem, &vDestino, comparaVertice);
@@ -132,14 +133,14 @@ void main(){
             if (result != 0)
                 printf("Existe caminho!");
             else
-                printf("Não existe caminho!");
+                printf("Nï¿½o existe caminho!");
 
             getch();
             break;
         case 9 :
-            printf ("\nID do vértice origem : ");
+            printf ("\nID do vï¿½rtice origem : ");
             scanf("%d", &vOrigem);
-            printf ("\nID do vértice destino : ");
+            printf ("\nID do vï¿½rtice destino : ");
             scanf("%d", &vDestino);
 
             pDLista caminho = getCaminho(grafo, &vOrigem, &vDestino, comparaVertice, alocaInfoVertice);
@@ -148,12 +149,23 @@ void main(){
                 imprimirLista(caminho, imprimeVerticeSemAdjacencias);
             }
             else
-                printf("\n *** NÃO existe um caminho. *** ");
+                printf("\n *** Nï¿½O existe um caminho. *** ");
 
             getch();
             break;
+            case 10 :
+                printf("\n TIPO: ");
+                if (grafoConexo(grafo, comparaVertice) == 1)
+                    printf("\n - Grafo conexo");
+                if (grafoBipartido(grafo, comparaVertice) == 1)
+                    printf("\n - Grafo bipartido");
+                if (existeCaminhoEuleriano(grafo, comparaVertice) == 1)
+                    printf("\n - Grafo euleriano");
+                if (existeCaminhoHamiltoniano(grafo, comparaVertice) == 1)
+                    printf("\n - Grafo hamiltoniano");
+                getch();
+            break;
         }
-
-    }while (opcao != 10);
+    }while (opcao != 11);
 
 }
